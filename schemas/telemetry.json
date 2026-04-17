@@ -37,6 +37,35 @@
     "battery": {
       "type": "number",
       "description": "Battery level (e.g. 0–100 percent or voltage)"
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Generic metrics map for integrations that send dynamic keys",
+      "additionalProperties": {
+        "type": ["number", "boolean", "string", "null"]
+      }
+    },
+    "points": {
+      "type": "array",
+      "description": "Optional list representation for arbitrary metrics",
+      "items": {
+        "type": "object",
+        "required": ["key", "value"],
+        "properties": {
+          "key": { "type": "string" },
+          "value": { "type": "number" },
+          "unit": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "deviceId": {
+      "type": "string",
+      "description": "Source device identifier"
+    },
+    "houseId": {
+      "type": "string",
+      "description": "Source house identifier"
     }
   },
   "additionalProperties": true

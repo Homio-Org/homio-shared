@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://homio/schemas/device.json",
+  "title": "Device",
+  "description": "Common device model shared across Homio services",
+  "type": "object",
+  "required": ["id", "houseId", "name", "type"],
+  "properties": {
+    "id": { "type": "string" },
+    "deviceId": { "type": "string" },
+    "houseId": { "type": "string" },
+    "roomId": { "type": "string" },
+    "name": { "type": "string" },
+    "type": {
+      "type": "string",
+      "enum": [
+        "sensor",
+        "actuator",
+        "switch",
+        "light",
+        "climate",
+        "thermostat",
+        "camera",
+        "lock",
+        "meter",
+        "alarm",
+        "gateway",
+        "other"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["online", "offline", "unknown"]
+    },
+    "ownerId": { "type": "string" },
+    "model": { "type": "string" },
+    "mqttTopicPrefix": { "type": "string" },
+    "metadata": { "type": "object", "additionalProperties": true },
+    "currentState": { "$ref": "device-state.json" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

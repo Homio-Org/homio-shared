@@ -1,0 +1,191 @@
+# OpenAPI fragment with shared Homio schemas
+# Include via $ref from main API spec, e.g. openapi/common.yaml#/components/schemas/Device
+
+components:
+  schemas:
+    DeviceState:
+      type: object
+      required: [deviceId, houseId, status]
+      properties:
+        deviceId:
+          type: string
+        houseId:
+          type: string
+        status:
+          type: string
+          enum: [online, offline, unknown]
+        lastSeenAt:
+          type: string
+          format: date-time
+        state:
+          type: object
+          additionalProperties: true
+        firmwareVersion:
+          type: string
+      additionalProperties: false
+
+    Room:
+      type: object
+      required: [id, houseId, name]
+      properties:
+        id:
+          type: string
+        houseId:
+          type: string
+        name:
+          type: string
+        floor:
+          type: string
+      additionalProperties: false
+
+    House:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        timezone:
+          type: string
+        rooms:
+          type: array
+          items:
+            $ref: "#/components/schemas/Room"
+      additionalProperties: false
+
+    Device:
+      type: object
+      required: [id, houseId, name, type]
+      properties:
+        id:
+          type: string
+        deviceId:
+          type: string
+        houseId:
+          type: string
+        roomId:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum: [sensor, actuator, switch, light, climate, thermostat, camera, lock, meter, alarm, gateway, other]
+        status:
+          type: string
+          enum: [online, offline, unknown]
+        ownerId:
+          type: string
+        model:
+          type: string
+        mqttTopicPrefix:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        currentState:
+          $ref: "#/components/schemas/DeviceState"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+
+    RuleCondition:
+      type: object
+      required: [field, operator, value]
+      properties:
+        field:
+          type: string
+        operator:
+          type: string
+        value: {}
+      additionalProperties: false
+
+    RuleAction:
+      type: object
+      required: [type]
+      properties:
+        type:
+          type: string
+        payload:
+          type: object
+          additionalProperties: true
+      additionalProperties: false
+
+    Rule:
+      type: object
+      required: [id, houseId, name, status, trigger, actions]
+      properties:
+        id:
+          type: string
+        houseId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [enabled, disabled]
+        isEnabled:
+          type: boolean
+        trigger:
+          type: string
+        triggerType:
+          type: string
+          enum: [time, device_state, telemetry, manual]
+        triggerConfig:
+          type: object
+          additionalProperties: true
+        conditions:
+          type: array
+          items:
+            $ref: "#/components/schemas/RuleCondition"
+        actions:
+          type: array
+          items:
+            $ref: "#/components/schemas/RuleAction"
+        actionType:
+          type: string
+          enum: [device_command, notify, scene]
+        actionConfig:
+          type: object
+          additionalProperties: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+
+    Notification:
+      type: object
+      required: [id, houseId, title, message, level, channel, createdAt]
+      properties:
+        id:
+          type: string
+        houseId:
+          type: string
+        deviceId:
+          type: string
+        title:
+          type: string
+        message:
+          type: string
+        level:
+          type: string
+          enum: [info, warning, error, critical]
+        channel:
+          type: string
+          enum: [in-app, push, email, telegram, webhook]
+        createdAt:
+          type: string
+          format: date-time
+        readAt:
+          type: string
+          format: date-time
+      additionalProperties: false
