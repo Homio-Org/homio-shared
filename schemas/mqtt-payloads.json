@@ -37,11 +37,62 @@
           "additionalProperties": true
         }
       ]
+    },
+    "TelemetryReceivedEventPayload": {
+      "type": "object",
+      "required": ["event", "houseId", "deviceId", "timestamp", "payload"],
+      "properties": {
+        "event": { "type": "string", "const": "telemetry.received" },
+        "houseId": { "type": "string" },
+        "deviceId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "payload": { "$ref": "#/$defs/TelemetryPayload" }
+      },
+      "additionalProperties": false
+    },
+    "DeviceStateUpdatedEventPayload": {
+      "type": "object",
+      "required": ["event", "houseId", "deviceId", "timestamp", "payload"],
+      "properties": {
+        "event": { "type": "string", "const": "device.state.updated" },
+        "houseId": { "type": "string" },
+        "deviceId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "payload": { "$ref": "#/$defs/DeviceStatePayload" }
+      },
+      "additionalProperties": false
+    },
+    "RuleTriggeredEventPayload": {
+      "type": "object",
+      "required": ["event", "houseId", "ruleId", "timestamp", "payload"],
+      "properties": {
+        "event": { "type": "string", "const": "rule.triggered" },
+        "houseId": { "type": "string" },
+        "ruleId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "payload": { "$ref": "rule.json" }
+      },
+      "additionalProperties": false
+    },
+    "NotificationRequestedEventPayload": {
+      "type": "object",
+      "required": ["event", "houseId", "timestamp", "payload"],
+      "properties": {
+        "event": { "type": "string", "const": "notification.requested" },
+        "houseId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "payload": { "$ref": "notification.json" }
+      },
+      "additionalProperties": false
     }
   },
   "oneOf": [
     { "$ref": "#/$defs/DeviceCommandPayload" },
     { "$ref": "#/$defs/DeviceStatePayload" },
-    { "$ref": "#/$defs/TelemetryPayload" }
+    { "$ref": "#/$defs/TelemetryPayload" },
+    { "$ref": "#/$defs/TelemetryReceivedEventPayload" },
+    { "$ref": "#/$defs/DeviceStateUpdatedEventPayload" },
+    { "$ref": "#/$defs/RuleTriggeredEventPayload" },
+    { "$ref": "#/$defs/NotificationRequestedEventPayload" }
   ]
 }

@@ -14,6 +14,7 @@ TypeScript exports:
 - `src/dtos/index.ts`
 - `src/mqtt/topics.ts`
 - `src/mqtt/payloads.ts`
+- `src/mqtt/contracts.ts`
 
 ## Schemas
 - JSON Schema: `schemas/*.json`
