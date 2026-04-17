@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://homio/schemas/mqtt-payloads.json",
+  "title": "MqttPayloads",
+  "description": "Common MQTT payload schemas for Homio topics",
+  "$defs": {
+    "DeviceCommandPayload": {
+      "type": "object",
+      "description": "Command payload published to homio/{houseId}/devices/{deviceId}/command",
+      "properties": {
+        "action": { "type": "string" },
+        "params": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": true
+    },
+    "DeviceStatePayload": {
+      "allOf": [
+        { "$ref": "device-state.json" },
+        {
+          "type": "object",
+          "properties": {
+            "event": { "type": "string", "const": "state_updated" },
+            "timestamp": { "type": "string", "format": "date-time" }
+          }
+        }
+      ]
+    },
+    "TelemetryPayload": {
+      "allOf": [
+        { "$ref": "telemetry.json" },
+        {
+          "type": "object",
+          "properties": {
+            "event": { "type": "string", "const": "telemetry" },
+            "timestamp": { "type": "string", "format": "date-time" }
+          },
+          "additionalProperties": true
+        }
+      ]
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/$defs/DeviceCommandPayload" },
+    { "$ref": "#/$defs/DeviceStatePayload" },
+    { "$ref": "#/$defs/TelemetryPayload" }
+  ]
+}

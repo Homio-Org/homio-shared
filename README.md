@@ -12,7 +12,10 @@ Common types, JSON schemas, OpenAPI spec files, topics protocol.
 TypeScript exports:
 - `src/index.ts`
 - `src/dtos/index.ts`
+- `src/mqtt/topics.ts`
+- `src/mqtt/payloads.ts`
 
 ## Schemas
 - JSON Schema: `schemas/*.json`
 - OpenAPI fragments: `openapi/telemetry.yaml`, `openapi/common.yaml`
+- MQTT payload schemas: `schemas/mqtt-payloads.json`
