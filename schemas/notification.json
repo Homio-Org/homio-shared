@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://homio/schemas/notification.json",
+  "title": "Notification",
+  "description": "Shared notification payload model",
+  "type": "object",
+  "required": ["id", "houseId", "title", "message", "level", "channel", "createdAt"],
+  "properties": {
+    "id": { "type": "string" },
+    "houseId": { "type": "string" },
+    "deviceId": { "type": "string" },
+    "title": { "type": "string" },
+    "message": { "type": "string" },
+    "level": { "type": "string", "enum": ["info", "warning", "error", "critical"] },
+    "channel": { "type": "string", "enum": ["in-app", "push", "email", "telegram", "webhook"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "readAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

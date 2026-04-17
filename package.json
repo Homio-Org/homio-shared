@@ -2,8 +2,8 @@
   "name": "homio-shared",
   "version": "0.0.1",
   "description": "Central DTOs, MQTT topic helpers, telemetry schema for Homio services",
-  "main": "dist/mqtt/topics.js",
-  "types": "dist/mqtt/topics.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test:topics": "npm run build && node -e \"console.log(require('./dist/mqtt/topics').telemetryTopic('house-1','dev-1'))\""

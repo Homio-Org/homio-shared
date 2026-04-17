@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://homio/schemas/device-state.json",
+  "title": "DeviceState",
+  "description": "Current state and connectivity snapshot of a device",
+  "type": "object",
+  "required": ["deviceId", "houseId", "status"],
+  "properties": {
+    "deviceId": { "type": "string" },
+    "houseId": { "type": "string" },
+    "status": { "type": "string", "enum": ["online", "offline", "unknown"] },
+    "lastSeenAt": { "type": "string", "format": "date-time" },
+    "state": { "type": "object", "additionalProperties": true },
+    "firmwareVersion": { "type": "string" }
+  },
+  "additionalProperties": false
+}

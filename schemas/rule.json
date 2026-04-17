@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://homio/schemas/rule.json",
+  "title": "Rule",
+  "description": "Automation rule shared model",
+  "type": "object",
+  "required": ["id", "houseId", "name", "status", "trigger", "actions"],
+  "properties": {
+    "id": { "type": "string" },
+    "houseId": { "type": "string" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "status": { "type": "string", "enum": ["enabled", "disabled"] },
+    "isEnabled": { "type": "boolean" },
+    "trigger": { "type": "string" },
+    "triggerType": { "type": "string", "enum": ["time", "device_state", "telemetry", "manual"] },
+    "triggerConfig": { "type": "object", "additionalProperties": true },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["field", "operator", "value"],
+        "properties": {
+          "field": { "type": "string" },
+          "operator": { "type": "string" },
+          "value": {}
+        },
+        "additionalProperties": false
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": { "type": "string" },
+          "payload": { "type": "object", "additionalProperties": true }
+        },
+        "additionalProperties": false
+      }
+    },
+    "actionType": { "type": "string", "enum": ["device_command", "notify", "scene"] },
+    "actionConfig": { "type": "object", "additionalProperties": true },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}
