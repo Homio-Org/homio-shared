@@ -12,6 +12,8 @@ export const COMMON_TELEMETRY_KEYS = [
   "battery",
 ] as const;
 
+export const SENSOR_TYPES = COMMON_TELEMETRY_KEYS;
+
 export type TelemetryMetricKey = (typeof COMMON_TELEMETRY_KEYS)[number] | string;
 
 export interface TelemetryPoint {

@@ -1,5 +1,8 @@
-export type NotificationLevel = "info" | "warning" | "error" | "critical";
-export type NotificationChannel = "in-app" | "push" | "email" | "telegram" | "webhook";
+export const NOTIFICATION_TYPES = ["info", "warning", "error", "critical"] as const;
+export type NotificationLevel = (typeof NOTIFICATION_TYPES)[number];
+
+export const NOTIFICATION_CHANNELS = ["in-app", "push", "email", "telegram", "webhook"] as const;
+export type NotificationChannel = (typeof NOTIFICATION_CHANNELS)[number];
 
 export interface Notification {
   /** Notification identifier. */

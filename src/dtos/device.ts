@@ -15,10 +15,11 @@ export const DEVICE_TYPES = [
   "other",
 ] as const;
 
-export type DeviceType =
-  | (typeof DEVICE_TYPES)[number];
+export type DeviceType = (typeof DEVICE_TYPES)[number];
 
-export type DeviceStatus = "online" | "offline" | "unknown";
+export const DEVICE_STATUSES = ["online", "offline", "unknown"] as const;
+
+export type DeviceStatus = (typeof DEVICE_STATUSES)[number];
 
 export interface Device {
   /** Internal device identifier (usually UUID). */
