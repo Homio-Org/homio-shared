@@ -1,8 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://homio/schemas/location.json",
-  "title": "HouseAndRoom",
-  "description": "Shared models for house and room entities",
+  "title": "Location",
   "$defs": {
     "Room": {
       "type": "object",
@@ -14,21 +13,6 @@
         "floor": { "type": "string" }
       },
       "additionalProperties": false
-    },
-    "House": {
-      "type": "object",
-      "required": ["id", "name"],
-      "properties": {
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "timezone": { "type": "string" },
-        "rooms": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/Room" }
-        }
-      },
-      "additionalProperties": false
     }
-  },
-  "oneOf": [{ "$ref": "#/$defs/House" }, { "$ref": "#/$defs/Room" }]
+  }
 }

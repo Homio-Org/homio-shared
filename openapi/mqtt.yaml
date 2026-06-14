@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: Homio MQTT contract
+  version: 0.0.1
+  description: Topic layout and payload shapes shared across NestJS services and Python simulators.
+
+paths: {}
+
+components:
+  parameters:
+    MqttTopicPrefix:
+      name: prefix
+      in: query
+      schema:
+        type: string
+        default: smart-home
+  schemas:
+    MqttTelemetryTopic:
+      type: string
+      example: smart-home/550e8400-e29b-41d4-a716-446655440000/device/660e8400-e29b-41d4-a716-446655440001/telemetry
+    MqttCommandTopic:
+      type: string
+      example: smart-home/550e8400-e29b-41d4-a716-446655440000/device/660e8400-e29b-41d4-a716-446655440001/command
+    MqttCommandPayload:
+      type: object
+      properties:
+        command:
+          type: string
+          enum: [start, stop, on, off, parameters, simulation]
+        running:
+          type: boolean
+        parameters:
+          type: object
+          additionalProperties: true
+      additionalProperties: true

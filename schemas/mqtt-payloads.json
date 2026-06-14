@@ -6,7 +6,7 @@
   "$defs": {
     "DeviceCommandPayload": {
       "type": "object",
-      "description": "Command payload published to homio/{houseId}/devices/{deviceId}/command",
+      "description": "Command payload published to smart-home/{houseId}/device/{deviceId}/command",
       "properties": {
         "action": { "type": "string" },
         "params": { "type": "object", "additionalProperties": true }
