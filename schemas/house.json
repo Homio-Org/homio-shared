@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://homio/schemas/house.json",
+  "title": "House",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "timezone": { "type": "string" },
+    "rooms": {
+      "type": "array",
+      "items": { "$ref": "location.json#/$defs/Room" }
+    }
+  },
+  "additionalProperties": false
+}

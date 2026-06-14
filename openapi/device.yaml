@@ -1,0 +1,74 @@
+openapi: 3.0.3
+info:
+  title: Homio device fragments
+  version: 0.0.1
+
+paths: {}
+
+components:
+  schemas:
+    Device:
+      type: object
+      required: [id, houseId, name, type]
+      properties:
+        id:
+          type: string
+        deviceId:
+          type: string
+        houseId:
+          type: string
+        roomId:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - sensor
+            - actuator
+            - switch
+            - light
+            - climate
+            - thermostat
+            - camera
+            - lock
+            - meter
+            - alarm
+            - gateway
+            - other
+        status:
+          type: string
+          enum: [online, offline, unknown]
+        ownerId:
+          type: string
+        model:
+          type: string
+        mqttTopicPrefix:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        currentState:
+          type: object
+          additionalProperties: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    DeviceCommandRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          enum: [on, off, simulation.start, simulation.stop, parameters]
+        houseId:
+          type: string
+          format: uuid
+        parameters:
+          type: object
+          additionalProperties: true
+        payload:
+          type: object
+          additionalProperties: true

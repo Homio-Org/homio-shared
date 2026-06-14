@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://homio/schemas/mqtt-topics.json",
+  "title": "MqttTopics",
+  "description": "Homio MQTT topic layout (default prefix smart-home)",
+  "type": "object",
+  "properties": {
+    "prefix": {
+      "type": "string",
+      "default": "smart-home"
+    },
+    "telemetry": {
+      "type": "string",
+      "description": "{prefix}/{houseId}/device/{deviceId}/telemetry"
+    },
+    "command": {
+      "type": "string",
+      "description": "{prefix}/{houseId}/device/{deviceId}/command"
+    },
+    "state": {
+      "type": "string",
+      "description": "{prefix}/{houseId}/device/{deviceId}/state"
+    }
+  }
+}

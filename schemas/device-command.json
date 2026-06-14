@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://homio/schemas/device-command.json",
+  "title": "DeviceCommand",
+  "oneOf": [
+    {
+      "type": "object",
+      "description": "HTTP POST /api/devices/:id/command",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": ["on", "off", "simulation.start", "simulation.stop", "parameters"]
+        },
+        "houseId": { "type": "string", "format": "uuid" },
+        "parameters": { "type": "object", "additionalProperties": true },
+        "payload": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "description": "MQTT command payload on smart-home/{houseId}/device/{deviceId}/command",
+      "properties": {
+        "command": {
+          "type": "string",
+          "enum": ["start", "stop", "on", "off", "parameters", "simulation"]
+        },
+        "running": { "type": "boolean" },
+        "parameters": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": true
+    }
+  ]
+}
